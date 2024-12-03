@@ -21,40 +21,16 @@ void display_welcome_message() {
 
 // Function to display the prompt
 void display_prompt() {
-    const char *prompt = "enseash> ";
+    const char *prompt = "enseash> \n";
     if (write(STDOUT_FILENO, prompt, strlen(prompt)) == -1) {
         perror("error while writting prompt");
         exit(EXIT_FAILURE);
     }
 }
 
-// Function to read user input
-void read_user_input(char *buffer) {
-    if (fgets(buffer, BUFFER_SIZE, stdin) == NULL) {
-            perror("error while reading user input");
-            exit(EXIT_FAILURE);
-    }
-}
-
-// Function to check if the user wants to exit
-int is_exit_command(const char *buffer) {
-    return strncmp(buffer, "exit", 4) == 0 && (buffer[4] == '\n' || buffer[4] == '\0');
-}
-
 int main(void) {
     
-    char buffer[BUFFER_SIZE];
     display_welcome_message();
-
-    while (1) {
-        display_prompt();
-
-        read_user_input(buffer);
-
-        if (is_exit_command(buffer)) {
-            break;
-        }
-    }
-
+    display_prompt();
     return 0;
 }
