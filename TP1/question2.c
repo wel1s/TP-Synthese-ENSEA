@@ -7,25 +7,16 @@
 
 #define BUFFER_SIZE 1024
 
-// Function to display the welcome message
-void display_welcome_message() {
-    const char *welcome_message = "Welcome to ENSEA Shell!\n";
-    const char *exit_command_message = "If you want to exit the program type 'exit'\n";
-    if (write(STDOUT_FILENO, welcome_message, strlen(welcome_message)) == -1) {
-        perror("error while writing welcome message");
-        exit(EXIT_FAILURE);
-    }
-    if (write(STDOUT_FILENO, exit_command_message, strlen(exit_command_message)) == -1) {
-        perror("error while writing exit command message");
-        exit(EXIT_FAILURE);
-    }
-}
+const char *WELCOME_MESSAGE = "Welcome to ENSEA Shell!\n";
+const char *EXIT_COMMAND_MESSAGE = "If you want to exit the program type 'exit'\n";
+const char *PROMPT = "enseash> ";
+char buffer[BUFFER_SIZE];
 
-// Function to display the prompt
-void display_prompt() {
-    const char *prompt = "enseash> ";
-    if (write(STDOUT_FILENO, prompt, strlen(prompt)) == -1) {
-        perror("error while writing prompt");
+
+// Function to display a message in the prompt
+void display(const char *message) {
+    if (write(STDOUT_FILENO, message, strlen(message)) == -1) {
+        perror("error while writing message");
         exit(EXIT_FAILURE);
     }
 }
@@ -37,6 +28,7 @@ void read_user_input(char *buffer) {
         exit(EXIT_FAILURE);
     }
 }
+
 
 // Function to execute a command
 void execute_command(char *command) {
@@ -60,14 +52,14 @@ void execute_command(char *command) {
 }
 
 int main(void) {
-    char buffer[BUFFER_SIZE];
-    display_welcome_message();
+    
+    display(WELCOME_MESSAGE);
+    display(EXIT_COMMAND_MESSAGE);
 
     while (1) {
-        display_prompt();
+        display(PROMPT);
         read_user_input(buffer);
         execute_command(buffer);
     }
-
     return 0;
 }

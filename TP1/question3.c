@@ -7,25 +7,17 @@
 
 #define BUFFER_SIZE 1024
 
-// Function to display the welcome message
-void display_welcome_message() {
-    const char *welcome_message = "Welcome to ENSEA Shell!\n";
-    const char *exit_command_message = "If you want to exit the program type 'exit'\n";
-    if (write(STDOUT_FILENO, welcome_message, strlen(welcome_message)) == -1) {
-        perror("error while writing welcome message");
-        exit(EXIT_FAILURE);
-    }
-    if (write(STDOUT_FILENO, exit_command_message, strlen(exit_command_message)) == -1) {
-        perror("error while writing exit command message");
-        exit(EXIT_FAILURE);
-    }
-}
+const char *WELCOME_MESSAGE = "Welcome to ENSEA Shell!\n";
+const char *EXIT_COMMAND_MESSAGE = "If you want to exit the program type 'exit'\n";
+const char *PROMPT = "enseash> ";
+const char *BYE_MESSAGE = "\nBye Bye\n";
+char buffer[BUFFER_SIZE];
 
-// Function to display the prompt
-void display_prompt() {
-    const char *prompt = "enseash> ";
-    if (write(STDOUT_FILENO, prompt, strlen(prompt)) == -1) {
-        perror("error while writing prompt");
+
+// Function to display a message in the prompt
+void display(const char *message) {
+    if (write(STDOUT_FILENO, message, strlen(message)) == -1) {
+        perror("error while writing message");
         exit(EXIT_FAILURE);
     }
 }
@@ -33,20 +25,21 @@ void display_prompt() {
 // Function to read user input
 int read_user_input(char *buffer) {
     if (fgets(buffer, BUFFER_SIZE, stdin) == NULL) {
-        if (feof(stdin)) {
+        if (feof(stdin)) { // handle Ctrl+D 
             return 0; 
         } else {
             perror("error while reading user input");
             exit(EXIT_FAILURE);
         }
     }
-    return 1;
+    return 1; 
 }
 
 // Function to check if the user wants to exit
 int is_exit_command(const char *buffer) {
     return strncmp(buffer, "exit", 4) == 0 && (buffer[4] == '\n' || buffer[4] == '\0');
 }
+
 
 // Function to execute a command
 void execute_command(char *command) {
@@ -70,25 +63,19 @@ void execute_command(char *command) {
 }
 
 int main(void) {
-    char buffer[BUFFER_SIZE];
-    display_welcome_message();
+    
+    display(WELCOME_MESSAGE);
+    display(EXIT_COMMAND_MESSAGE);
 
     while (1) {
-        display_prompt();
-
-        if (!read_user_input(buffer)||is_exit_command(buffer)) {
+        display(PROMPT);
+        if (!read_user_input(buffer) || is_exit_command(buffer)) {
             break;
         }
-
         execute_command(buffer);
     }
 
-    const char *BYE_MESSAGE = "\nBye Bye\n";
-    if (write(STDOUT_FILENO, BYE_MESSAGE, strlen(BYE_MESSAGE)) == -1) {
-        perror("error while writing exit command message");
-        exit(EXIT_FAILURE);
-    }
-
+    display(BYE_MESSAGE);
 
     return 0;
 }
