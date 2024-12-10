@@ -1,0 +1,22 @@
+total 240
+-rw-rw-r-- 1 wells wells   176 déc.  10 09:29 filelist.txt
+-rw-rw-r-- 1 wells wells   234 déc.   3 13:12 Makefile
+-rwxrwxr-x 1 wells wells 18096 déc.  10 11:04 question1
+-rw-rw-r-- 1 wells wells   610 déc.   3 12:31 question1.c
+-rwxrwxr-x 1 wells wells 20272 déc.  10 11:04 question2
+-rw-rw-r-- 1 wells wells  1515 déc.   3 12:47 question2.c
+-rwxrwxr-x 1 wells wells 20720 déc.  10 11:04 question3
+-rw-rw-r-- 1 wells wells  1944 déc.   3 12:50 question3.c
+-rwxrwxr-x 1 wells wells 21016 déc.  10 11:04 question4
+-rw-rw-r-- 1 wells wells  2779 déc.  10 09:02 question4.c
+-rwxrwxr-x 1 wells wells 21496 déc.  10 11:04 question5
+-rw-rw-r-- 1 wells wells  3435 déc.  10 09:18 question5.c
+-rwxrwxr-x 1 wells wells 21688 déc.  10 11:04 question6
+-rw-rw-r-- 1 wells wells  3790 déc.  10 09:24 question6.c
+-rwxrwxr-x 1 wells wells 22576 déc.  10 11:40 question7
+-rw-rw-r-- 1 wells wells  4806 déc.  10 11:40 question7.c
+-rwxrwxr-x 1 wells wells 22808 déc.  10 11:04 question8
+-rw-rw-r-- 1 wells wells  6874 déc.  10 09:36 question8.c
+-rw-rw-r-- 1 wells wells     0 déc.  10 11:41 tata.txt
+-rw-rw-r-- 1 wells wells  1166 déc.  10 11:41 titi.txt
+-rw-rw-r-- 1 wells wells  1110 déc.  10 10:07 toto.txt
